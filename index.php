@@ -5,10 +5,22 @@ ini_set('default_socket_timeout', 300);
 session_start();
 
 //Make Constants using define.
-define('client_ID', 'c73d173254d844b89d8117954f97d9ee');
-define('client_Secret', '971766cd8c4f4af7b7a6ff36f32b68b0');
+define('clientID', 'c73d173254d844b89d8117954f97d9ee');
+define('clientSecret', '971766cd8c4f4af7b7a6ff36f32b68b0');
 define('redirectURI', 'http://localhost/appacademyapi/index.php');
 define('ImageDirectory', 'pics/');
+
+if isset(($_GET['code'])) {
+	$code = ($_GET['code']);
+	$url = 'https://api.instagram.com/oauth/access_token';
+	$access_token_settings = array('client_id' => clientID, 
+		'client_secret' => clientSecret,
+		'grant_type' => 'authorization_code',
+		'redirect_uri' => redirectURI,
+		'code' => $code
+		);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +38,7 @@ define('ImageDirectory', 'pics/');
 	<!-- Creating a login for people to go and give approval for our web app to access their Instagram Account
 	After getting approval we are now going to have the info so that we can play with it.
 	 -->
-	<a href="https:api.instagram/oauth/authorize/?client_id=<?php echo client_ID; ?>&redirect_uri=<?php echo redirectURI; ?>&response_type=code">LOGIN</a>
+	<a href="https:appacademyapi/oauth/authorize/?clientid=<?php echo clientID; ?>&redirect_uri=<?php echo redirectURI; ?>&response_type=code">LOGIN</a>
 <script src="js/main.js"></script>
 </body>
 </html>
